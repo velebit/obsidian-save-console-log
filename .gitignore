@@ -1,0 +1,29 @@
+# Backup files
+*~
+*.orig
+*.bak
+
+# Secrets
+.env
+
+# Intellij
+*.iml
+.idea
+
+# npm / yarn
+node_modules
+yarn.lock
+
+# Don't include the compiled main.js file in the repo.
+# They should be uploaded to GitHub releases instead.
+main.js
+dist
+
+# Exclude sourcemaps
+*.map
+
+# obsidian
+data.json
+
+# Exclude macOS Finder (System Explorer) View States
+.DS_Store
