@@ -1,6 +1,6 @@
 {
 	"name": "obsidian-save-console-log",
-	"version": "0.0.1",
+	"version": "0.1.0",
 	"description": "Save the log from the Obsidian developer console to a file. Particularly helpful on mobile, where the developer console cannot be easily accessed.",
 	"main": "src/main.ts",
 	"scripts": {
