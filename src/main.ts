@@ -3,11 +3,13 @@ import {
 	Plugin,
 } from "obsidian";
 
-import monkeyPatchConsole from "./obsidian-debug-mobile";
+import { monkeyPatchConsole, getLogFile } from "./obsidian-debug-mobile";
 
 export default class SaveConsoleLog extends Plugin {
 	async onload() {
-		monkeyPatchConsole(this);
+		const logFile = getLogFile(this);
+		monkeyPatchConsole(this, logFile);
+		new Notice("Saving Obsidian console log to " + logFile);
 	}
 
 }
