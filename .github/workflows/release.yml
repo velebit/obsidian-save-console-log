@@ -6,7 +6,7 @@ on:
       - "*"
 
 env:
-  PLUGIN_NAME: obsidian-trim-whitespace # Change this to match the id of your plugin.
+  PLUGIN_NAME: obsidian-save-console-log  # Change this to match the id of your plugin.
 
 jobs:
   build:

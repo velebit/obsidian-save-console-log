@@ -30,5 +30,5 @@ To install, either:
 - The console is redirected when the plugin is enabled, but it’s not restored when the plugin is disabled
 - If you are using this plugin with a vault that uses Git, you probably want to add the log file path to your `.gitignore` file, so the log isn’t commited into Git:
 ```
-.obsidian/plugins/obsidian-save-console-log/logs.txt
+/.obsidian/plugins/obsidian-save-console-log/logs.txt
 ```
