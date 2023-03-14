@@ -28,12 +28,9 @@ jobs:
           PACKAGE="${{ env.PLUGIN_NAME }}"-"$VERSION".zip
           zip -r "$PACKAGE" "${{ env.PLUGIN_NAME }}"
           echo "PACKAGE=$PACKAGE" >> "$GITHUB_OUTPUT"
-          ls
       - name: Create Release
         id: create_release
         uses: softprops/action-gh-release@v1
         with:
           files: |
             ${{ steps.build.outputs.PACKAGE }}
-            dist/main.js
-            dist/manifest.json
