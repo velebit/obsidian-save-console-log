@@ -22,15 +22,18 @@ jobs:
         run: |
           npm install
           npm run build
-          mkdir ${{ env.PLUGIN_NAME }}
-          cp ./dist/main.js ./dist/manifest.json ${{ env.PLUGIN_NAME }}
-          zip -r ${{ env.PLUGIN_NAME }}-${{ github.ref }}.zip ${{ env.PLUGIN_NAME }}
+          mkdir "${{ env.PLUGIN_NAME }}"
+          cp ./dist/main.js ./dist/manifest.json "${{ env.PLUGIN_NAME }}"
+          VERSION="$(echo "${{ github.ref }}" | sed -e 's,.*/,,')"
+          PACKAGE="${{ env.PLUGIN_NAME }}"-"$VERSION".zip
+          zip -r "$PACKAGE" "${{ env.PLUGIN_NAME }}"
+          echo "PACKAGE=$PACKAGE" >> "$GITHUB_OUTPUT"
           ls
       - name: Create Release
         id: create_release
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            ${{ env.PLUGIN_NAME }}-${{ github.ref }}.zip
+            ${{ steps.build.outputs.PACKAGE }}
             dist/main.js
             dist/manifest.json
