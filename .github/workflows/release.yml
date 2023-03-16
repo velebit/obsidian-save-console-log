@@ -3,7 +3,10 @@ name: Release Obsidian plugin
 on:
   push:
     tags:
-      - "v[0-9]+.[0-9]+.[0-9]+"
+      - "[0-9]+.[0-9]+.[0-9]+"
+      - "[0-9]+.[0-9]+.[0-9]+-alpha.[0-9]+"
+      - "[0-9]+.[0-9]+.[0-9]+-beta.[0-9]+"
+      - "[0-9]+.[0-9]+.[0-9]+-rc.[0-9]+"
 
 env:
   PLUGIN_NAME: obsidian-save-console-log  # Change this to match the id of your plugin.
@@ -25,12 +28,18 @@ jobs:
           mkdir "${{ env.PLUGIN_NAME }}"
           cp ./dist/main.js ./dist/manifest.json "${{ env.PLUGIN_NAME }}"
           VERSION="$(echo "${{ github.ref }}" | sed -e 's,.*/,,')"
-          PACKAGE="${{ env.PLUGIN_NAME }}"-"$VERSION".zip
-          zip -r "$PACKAGE" "${{ env.PLUGIN_NAME }}"
-          echo "PACKAGE=$PACKAGE" >> "$GITHUB_OUTPUT"
+          PACKAGE_ZIP="${{ env.PLUGIN_NAME }}"-"$VERSION".zip
+          PACKAGE_TAR="${{ env.PLUGIN_NAME }}"-"$VERSION".tar.gz
+          zip -r "$PACKAGE_ZIP" "${{ env.PLUGIN_NAME }}"
+          tar cvaf "$PACKAGE_TAR" "${{ env.PLUGIN_NAME }}"
+          echo "PACKAGE_ZIP=$PACKAGE_ZIP" >> "$GITHUB_OUTPUT"
+          echo "PACKAGE_TAR=$PACKAGE_TAR" >> "$GITHUB_OUTPUT"
       - name: Create Release
         id: create_release
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            ${{ steps.build.outputs.PACKAGE }}
+            ${{ steps.build.outputs.PACKAGE_ZIP }}
+            ${{ steps.build.outputs.PACKAGE_TAR }}
+            dist/main.js
+            dist/manifest.json
