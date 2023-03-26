@@ -25,10 +25,15 @@ To install, either:
 
 ---
 
-### Known Bugs and Interactions
+## Known Bugs and Interactions
 
 - The console is redirected when the plugin is enabled, but it’s not restored when the plugin is disabled
 - If you are using this plugin with a vault that uses Git, you probably want to add the log file path to your `.gitignore` file, so the log isn’t commited into Git:
 ```
 /.obsidian/plugins/obsidian-save-console-log/logs.txt
 ```
+- The commit history prior to release 0.1.2 has been completely rewritten to
+  fix my author name having been set incorrectly. (Release 0.1.2 is otherwise
+  identical to 0.1.1.) I only thought I could get away with it because it’s
+  likely no one was using this. If you had checked out the repository before
+  2023-03-26, my apologies! It won’t happen again.
